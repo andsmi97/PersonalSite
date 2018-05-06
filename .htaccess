@@ -1,0 +1,40 @@
+Options All -ExecCGI -Indexes -Includes +FollowSymLinks
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 10 minutes"
+
+    ExpiresByType js/js "access plus 10 minutes"
+    ExpiresByType css/css "access plus 10 minutes"
+</IfModule>
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteBase /
+	RewriteCond %{HTTP_HOST} ^black-web
+	RewriteRule (.*) http://www.black-web.ru/$1 [R=301,L]
+	RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+	RewriteRule ^index\.php$ http://www.black-web.ru/ [R=301,L]
+</IfModule>
+# Bad Rquest
+ErrorDocument 400 /400.html
+# Authorization Required
+ErrorDocument 401 /401.html
+# Forbidden
+ErrorDocument 403 /403.html
+# Not found
+ErrorDocument 404 /404.html
+# Method Not Allowed
+ErrorDocument 405 /405.html
+# Request Timed Out
+ErrorDocument 408 /408.html
+# Request URI Too Long
+ErrorDocument 414 /414.html
+# Internal Server Error
+ErrorDocument 500 /500.html
+# Not Implemented
+ErrorDocument 501 /501.html
+# Bad Gateway 
+ErrorDocument 502 /502.html
+# Service Unavailable 
+ErrorDocument 503 /503.html
+# Gateway Timeout
+ErrorDocument 504 /504.html
